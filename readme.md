@@ -6,9 +6,9 @@ This repo contains two simple files that execute scikitlearn's TF-IDF functional
 
 The files consist of:
 
-1. [scikit_tfidf.py](/scripts/tfidf/scikit_tfidf.py): Runs tfidf on a corpus, 
+1. [scikit_tfidf.py](scikit_tfidf.py): Runs tfidf on a corpus, 
 with outputs going to csv.
-3. [scikit_tfidf.sbatch](/scripts/tfidf/scikit_tfidf.sbatch): Creates a batch job for scikit_tfidf.py.
+3. [scikit_tfidf.sbatch](scikit_tfidf.sbatch): Creates a batch job for scikit_tfidf.py.
 
 ## Usage instructions
 
@@ -16,56 +16,38 @@ with outputs going to csv.
 ```
 ssh yourSUNetID@sherlock.stanford.edu
 ```
-
-2. Once you are logged in, you'll want to have access to these files, which you can get with a couple simple commands. First, we need to install a program called subversion:
-```
-module load system subversion/1.12.2
-```
-and use that program to download the files:
-```
-svn export https://github.com/bcritt1/H-S-Documentation/trunk/scripts/tfidf/ tfidf
-```
-![nltkdir](/images/tfidfdir.png)
-This will create a directory in your home space on Sherlock called "tfidf" with all the files in this 
-repository. You'll want to
-```
-ml purge
-```
-after this as subversion tends to interfere with python dependencies.
-
-3. Once you have the files, you'll use packages.sh to set up your environment. First, let's move into our new directory::
-```
-cd tfidf/
+2. Once you're on Sherlock, you'll want to have access to these files:
+```bash
+git clone https://github.com/bcritt1/tfidf_python.git
 ```
 
-4. We just need to make one small tweak to our main script:
-```
-nano scikit_tfidf.py
-```
-and change the line "corpus dir = /scratch/users/bcritt/corpus/" to the location of your corpus[^1]. For info on 
-transferring data to Sherlock, see: [https://www.sherlock.stanford.edu/docs/storage/data-transfer/](https://www.sherlock.stanford.edu/docs/storage/data-transfer/). For the purposes of efficiency, it is best that you locate your corpus in 
-scratch like me, but it can be anywhere so long as you point the script to it. There is a .csv output line at the 
-end of this file that can be added after any intermediate step, though you'll need to do some output control to 
-prevent each .csv from overwriting the next.
+This will create a directory in your home space on Sherlock called "tfidf_python" with all the files in this 
+repository. 
 
-6. At this point, we're just about ready to run our main script. However, you'll want to make a few tweaks to 
-scikit_tfidf.sbatch first. I've tuned most parameters for this process, but you'll need to change 
-the path for your *.out and *.err files, which give you feedback on what went wrong should your script fail. I route them to /out and /err directories in my home: you can do the same by changing my user 
-name to yours in the script. You may need to increase mem or time depending on the size of your corpus, but the 
-values given here are a pretty good starting place.
+3. Let's also make three directories for the outputs of our process:
+```
+mkdir out err /scratch/users/$USER/outputs
+```
 
- ```
-nano scikit_tfidf.sbatch
+4. Once you have the files, you'll use packages.sh to set up your environment. First, let's move into our new directory::
 ```
-to make any of these changes.
+cd tfidf_python/
+```
 
-Then you should be able to run with: 
+5. Now, let's move into our new directory
 ```
-sbatch scikit_tfidf.sbatch
+cd huggingface
 ```
-When it finishes running, you should see your output as a .csv file in outputs/tfidf_outputs in scratch. This data 
-can then be 
-used as an input for some other process.
+and submit our sbatch file to slurm, Sherlock's job scheduler: 
+```
+sbatch huggingface.sbatch
+```
+You can watch your program run with
+```
+watch squeue -u $USER
+```
+When it finishes running, you should see your outputs as .csv and .json files in the outputs/ 
+directory on scratch. This data can then be used as an input for other processes, or analyzed on its own.
 
 ### Notes
 
