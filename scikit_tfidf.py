@@ -7,7 +7,7 @@ import pandas as pd
 user = os.getenv('USER')
 #corpusdir = '/scratch/users/{}/corpus/'.format(user)
 all_txt_files =[]
-for file in Path("/scratch/users/{}/corpus/".format(user)).rglob("*.txt"):
+for file in Path("/farmshare/learning/data/emerson/".rglob("*.txt"):
      all_txt_files.append(file.parent / file.name)
 # counts the length of the list
 n_files = len(all_txt_files)
@@ -29,7 +29,7 @@ Path("/scratch/users/{}/outputs/tf_idf_output".format(user)).mkdir(parents=True,
 
 # construct a list of output file paths using the previous list of text files the relative path for tf_idf_output
 output_filenames = [str(txt_file).replace(".txt", ".csv").replace("/scratch/users/{}/corpus/".format(user),
-"/scratch/users/{}/outputs/tf_idf_output/".format(user)) for txt_file in all_txt_files]
+"/scratch/users/{}/outputs/".format(user)) for txt_file in all_txt_files]
 
 # loop each item in transformed_documents_as_array, using enumerate to keep track of the current position
 for counter, doc in enumerate(transformed_documents_as_array):
