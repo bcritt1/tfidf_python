@@ -7,7 +7,7 @@ import pandas as pd
 user = os.getenv('USER')
 #corpusdir = '/scratch/users/{}/corpus/'.format(user)
 all_txt_files =[]
-for file in Path("/farmshare/learning/data/emerson/".rglob("*.txt"):
+for file in Path("/farmshare/learning/data/emerson/").rglob("*.txt"):
      all_txt_files.append(file.parent / file.name)
 # counts the length of the list
 n_files = len(all_txt_files)
@@ -16,7 +16,7 @@ print(n_files)
 all_docs = []
 for txt_file in all_txt_files:
     with open(txt_file) as f:
-        txt_file_as_string = f.read()  
+        txt_file_as_string = f.read()
     all_docs.append(txt_file_as_string)
 
 vectorizer = TfidfVectorizer(max_df=.65, min_df=1, stop_words=None, use_idf=True, norm=None)
