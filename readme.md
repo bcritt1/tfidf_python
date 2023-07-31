@@ -14,9 +14,9 @@ with outputs going to csv.
 
 1. ssh into sherlock with the syntax: 
 ```
-ssh yourSUNetID@sherlock.stanford.edu
+ssh yourSUNetID@rice.stanford.edu
 ```
-2. Once you're on Sherlock, you'll want to have access to these files:
+2. Once you're on Farmshare, you'll want to have access to these files:
 ```bash
 git clone https://github.com/bcritt1/tfidf_python.git
 ```
@@ -29,15 +29,11 @@ repository.
 mkdir out err /scratch/users/$USER/outputs
 ```
 
-4. Once you have the files, you'll use packages.sh to set up your environment. First, let's move into our new directory::
+4. Now let's move into the git repo, let's move into our new directory::
 ```
 cd tfidf_python/
 ```
 
-5. Now, let's move into our new directory
-```
-cd huggingface
-```
 and submit our sbatch file to slurm, Sherlock's job scheduler: 
 ```
 sbatch huggingface.sbatch
