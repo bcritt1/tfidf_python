@@ -22,7 +22,7 @@ cd /farmshare/learning/scripts/scripts/tfidf_python
 ```
 3. Let's also make three directories for the outputs of our process:
 ```
-mkdir /scratch/users/$USER/out /scratch/users/$USER/err /scratch/users/$USER/outputs
+mkdir ~/out ~/err /scratch/users/$USER/outputs
 ```
 4.  At this point we can submit our sbatch file to slurm, Sherlock's job scheduler: 
 ```
