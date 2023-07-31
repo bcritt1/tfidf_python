@@ -16,27 +16,17 @@ with outputs going to csv.
 ```
 ssh yourSUNetID@rice.stanford.edu
 ```
-2. Once you're on Farmshare, you'll want to have access to these files:
+2. Once you're on Farmshare, you'll want to have access to these files, so we'll move to the learning environment with:
 ```bash
-git clone https://github.com/bcritt1/tfidf_python.git
+cd /farmshare/learning/scripts/scripts/tfidf_python
 ```
-
-This will create a directory in your home space on Sherlock called "tfidf_python" with all the files in this 
-repository. 
-
 3. Let's also make three directories for the outputs of our process:
 ```
-mkdir out err /scratch/users/$USER/outputs
+mkdir /scratch/users/$USER/out /scratch/users/$USER/err /scratch/users/$USER/outputs
 ```
-
-4. Now let's move into the git repo, let's move into our new directory::
+4.  At this point we can submit our sbatch file to slurm, Sherlock's job scheduler: 
 ```
-cd tfidf_python/
-```
-
-and submit our sbatch file to slurm, Sherlock's job scheduler: 
-```
-sbatch huggingface.sbatch
+sbatch scikit_tfidf.sbatch
 ```
 You can watch your program run with
 ```
