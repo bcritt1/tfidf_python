@@ -5,5 +5,6 @@
 #SBATCH -p normal
 #SBATCH -c 1
 #SBATCH --mem=32GB
-pip3 install scikit-learn
+ml python/3.11.4
+pip3 install --user scikit-learn
 python3 scikit_tfidf.py

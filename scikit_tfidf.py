@@ -1,7 +1,10 @@
 #Adapted from https://programminghistorian.org/en/lessons/analyzing-documents-with-tfidf
 import os
+#import sklearn
 from pathlib import Path
 from sklearn.feature_extraction.text import TfidfVectorizer
+#from sklearn.feature_extraction.text import TfidfVectorizor
+#from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 
 user = os.getenv('USER')
@@ -28,8 +31,8 @@ transformed_documents_as_array = transformed_documents.toarray()
 Path("/scratch/users/{}/outputs/tf_idf_output".format(user)).mkdir(parents=True, exist_ok=True)
 
 # construct a list of output file paths using the previous list of text files the relative path for tf_idf_output
-output_filenames = [str(txt_file).replace(".txt", ".csv").replace("/scratch/users/{}/corpus/".format(user),
-"/scratch/users/{}/outputs/".format(user)) for txt_file in all_txt_files]
+output_filenames = [str(txt_file).replace(".txt", ".csv").replace("/farmshare/learning/data/emerson/".format(user),
+"/scratch/users/{}/outputs/tf_idf_output/".format(user)) for txt_file in all_txt_files]
 
 # loop each item in transformed_documents_as_array, using enumerate to keep track of the current position
 for counter, doc in enumerate(transformed_documents_as_array):
